@@ -9,6 +9,19 @@ async function loadChannels() {
         option.textContent = channel.name;
         channelSelect.appendChild(option);
     });
+
+    // Add search functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+        const filter = searchInput.value.toLowerCase();
+        const options = channelSelect.options;
+
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            const text = option.text.toLowerCase();
+            option.style.display = text.includes(filter) ? 'block' : 'none';
+        }
+    });
 }
 
 document.getElementById('playButton').addEventListener('click', () => {
