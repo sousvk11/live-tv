@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>m3u8 Streaming</title>
+    <title>Responsive m3u8 Streaming</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Select Channel</h1>
+    <div class="container">
+        <h1>Live Streaming Channels</h1>
 
-    <input type="text" id="searchInput" placeholder="Search channels..." />
-    
-    <label for="channelSelect">Choose a channel:</label>
-    <select id="channelSelect"></select>
+        <!-- Channel Search -->
+        <input type="text" id="searchChannel" placeholder="Search channels..." />
 
-    <button id="playButton">Play</button>
+        <!-- Channel Selection -->
+        <label for="channelSelect">Choose a channel:</label>
+        <select id="channelSelect"></select>
 
-    <video id="video" controls width="600"></video>
+        <!-- Video Quality Selection -->
+        <label for="qualitySelect">Select Video Quality:</label>
+        <select id="qualitySelect"></select>
 
+        <button id="playButton">Play</button>
+
+        <!-- Video Player -->
+        <div class="video-container">
+            <video id="video" controls width="100%"></video>
+        </div>
+    </div>
+
+    <!-- HLS.js -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <!-- Custom JS -->
     <script src="script.js"></script>
 </body>
 </html>
