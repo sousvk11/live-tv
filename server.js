@@ -43,14 +43,9 @@ app.get('/api/channels', async (req, res) => {
     }
 });
 
-// Mock function for quality levels
-app.get('/api/qualities', (req, res) => {
-    const qualities = [
-        { label: '720p', url: '/path/to/output_720p.m3u8' },
-        { label: '480p', url: '/path/to/output_480p.m3u8' },
-        { label: '240p', url: '/path/to/output_240p.m3u8' }
-    ];
-    res.json(qualities);
+// Serve the frontend files
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start the server
