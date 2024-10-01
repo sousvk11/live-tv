@@ -23,4 +23,5 @@ CMD ffmpeg -i "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeebangla1/default/z
 -hls_time 20 \
 -hls_list_size 100 \
 -hls_flags delete_segments \
--f hls /var/www/html/stream/output.m3u8
+-f hls /var/www/html/stream/output.m3u8 && \
+apachectl -D FOREGROUND
