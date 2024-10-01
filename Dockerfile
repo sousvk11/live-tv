@@ -1,22 +1,20 @@
-# Base image
-FROM ubuntu:latest
+# Use the official Node.js image
+FROM node:18
 
-# Install required packages: FFmpeg and Apache
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    apache2 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Set the working directory
+WORKDIR /usr/src/app
 
-# Create directory for HLS stream
-RUN mkdir -p /var/www/html
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# Create a startup script
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
+# Install dependencies
+RUN npm install
 
-# Expose port 80 for Apache
-EXPOSE 80
+# Copy the rest of the application code
+COPY . .
 
-# Use the startup script as the command
-CMD ["/start.sh"]
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "server.js"]
