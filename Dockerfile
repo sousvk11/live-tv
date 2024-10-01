@@ -9,19 +9,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Create directory for HLS stream
-RUN mkdir -p /var/www/html/stream
+RUN mkdir -p /var/www/html
+
+# Create a startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # Expose port 80 for Apache
 EXPOSE 80
 
-# Start FFmpeg and Apache
-CMD ffmpeg -i "https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeebangla1/default/zeebangla1.m3u8" \
--vf scale=426:240 \
--c:v libx264 \
--preset veryfast \
--c:a aac \
--hls_time 20 \
--hls_list_size 100 \
--hls_flags delete_segments \
--f hls /var/www/html/stream/output.m3u8 && \
-apachectl -D FOREGROUND
+# Use the startup script as the command
+CMD ["/start.sh"]
